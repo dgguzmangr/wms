@@ -1,0 +1,27 @@
+- El usuario debe acceer según las bodegas asignadas
+- Roles (estructura jerárquica de la compañía)
+- Tipos de ubicaciones: Doble profundidad (estantería)
+ 			Sencilla (estantería)
+			Piso
+			Acopio (stage de recepción y desapacho)
+			Maquila
+- Restricción de conbinación: No se pueden combinar ciertos productos
+- El cliente tiene estado true/false
+- El cliente pued tener varios usuarios
+- El cliente puede tener interfaz (conectado con API)
+- El cliente puede tener una interfaz dentro del software
+- El destinatario puede ser proveedor
+
+
+Transportadora (nobmre de la empresa)
+Conductor: 	- Nombre
+		- CC
+Placa
+Recepción
+Despacho
+
+
+- Una bodega tiene únicamente un resposable activo, y se almacenan todos los responsables
+- SKU Código de referencia (código de barras) 
+- Unidad de medida: pieza, caja, palet, kilo, bulto (...)
+- Producto y huella se conectan con el SKU
