@@ -7,51 +7,72 @@ const router = createRouter({
         {
             path: '/',
             component: AppLayout,
+            //meta: { requiresAuth: true },
             children: [
-                //AppMenu
                 {
                     path: '/users_manager',
                     name: 'users_manager',
-                    component: () => import('@/views/Users_manager.vue')
+                    component: () => import('@/views/Users_manager.vue'),
+                    meta: { requiresAuth: true, requiredPermissions: ['show_users',] }
                 },
                 {
                     path: '/warehouse_manager',
                     name: 'warehouse_manager',
-                    component: () => import('@/views/Warehouse_manager.vue')
+                    component: () => import('@/views/Warehouse_manager.vue'),
+                    meta: { requiresAuth: true, requiredPermissions: [
+                        'authApp.show_warehouses', 
+                        'authApp.create_warehouses',
+                        'authApp.update_warehouses', 
+                        'authApp.partial_update_warehouses',
+                        'authApp.delete_warehouses',
+                        'authApp.show_warehouse_buildings',
+                    ]}
                 },
                 {
                     path: '/warehousemanager',
                     name: 'warehousemanager',
-                    component: () => import('@/views/WarehouseManagerView.vue')
+                    component: () => import('@/views/WarehouseManagerView.vue'),
+                    meta: { requiresAuth: true, requiredPermissions: [
+                        'authApp.show_warehouses', 
+                        'authApp.create_warehouses',
+                        'authApp.update_warehouses', 
+                        'authApp.partial_update_warehouses',
+                        'authApp.delete_warehouses',
+                        'authApp.show_warehouse_buildings',
+                    ]}
                 },
                 {
                     path: '/inventory_manager',
                     name: 'inventory_manager',
-                    component: () => import('@/views/Inventory_manager.vue')
+                    component: () => import('@/views/Inventory_manager.vue'),
+                    meta: { requiresAuth: true, requiredPermissions: ['edit_inventory'] }
                 },
                 {
                     path: '/client_manager',
                     name: 'client_manager',
-                    component: () => import('@/views/Client_manager.vue')
+                    component: () => import('@/views/Client_manager.vue'),
+                    meta: { requiresAuth: true, requiredPermissions: ['view_clients'] }
                 },
                 {
                     path: '/carrier_manager',
                     name: 'carrier_manager',
-                    component: () => import('@/views/Carrier_manager.vue')
+                    component: () => import('@/views/Carrier_manager.vue'),
+                    meta: { requiresAuth: true, requiredPermissions: ['view_carriers'] }
                 },
                 {
                     path: '/crud_prueba',
                     name: 'crud_prueba',
-                    component: () => import('@/views/Crud_pruebaView.vue')
+                    component: () => import('@/views/Crud_pruebaView.vue'),
+                    meta: { requiresAuth: true, requiredPermissions: ['crud_prueba'] }
                 },
                 {
                     path: '/productmanager',
                     name: 'productmanager',
-                    component: () => import('@/views/ProductManagerView.vue')
+                    component: () => import('@/views/ProductManagerView.vue'),
+                    meta: { requiresAuth: true, requiredPermissions: ['manage_products'] }
                 }
             ]
         },
-        //login
         {
             path: '/landing',
             name: 'landing',
@@ -71,8 +92,33 @@ const router = createRouter({
             path: '/login',
             name: 'login',
             component: () => import('@/views/pages/auth/Login.vue')
-        },
+        }
     ]
+});
+
+router.beforeEach((to, from, next) => {
+    const isAuthenticated = !!localStorage.getItem('token');
+    let permissions = [];
+
+    try {
+        permissions = localStorage.getItem('permissions') ? JSON.parse(localStorage.getItem('permissions')) : [];
+    } catch (e) {
+        console.error('Error parsing permissions:', e);
+        localStorage.removeItem('permissions');  // Eliminar el valor inválido
+    }
+    
+    if (to.matched.some(record => record.meta.requiresAuth) && !isAuthenticated) {
+        next({ name: 'access' });
+    } else if (to.meta.requiredPermissions) {
+        const hasPermission = to.meta.requiredPermissions.every(permission => permissions.includes(permission));
+        if (!hasPermission) {
+            next({ name: 'access' });
+        } else {
+            next();
+        }
+    } else {
+        next();
+    }
 });
 
 export default router;
