@@ -1,11 +1,15 @@
 <template>
-    <CrudTable :tableTitle="'warehouses'" :tableColumns="warehouseColumns" :createDialogFields="warehouseCreateFields"
-        :tableData="warehouseData" />
+    <CrudTable 
+        :tableTitle="tableTitle" 
+        :tableColumns="warehouseColumns" 
+        :createDialogFields="warehouseCreateFields"
+        :tableData="warehouseData" 
+    />
 </template>
 
 <script>
 import CrudTable from '@/components/CrudTable.vue';
-import { warehouseColumns, warehouseCreateFields, tableTitle } from '@/utils/warehouseCrudTable.js';
+import { warehouseColumns, warehouseCreateFields, tableTitles } from '@/utils/warehouseCrudTable.js';
 import axios from 'axios';
 
 export default {
@@ -17,7 +21,7 @@ export default {
         return {
             warehouseColumns: warehouseColumns,
             warehouseCreateFields: warehouseCreateFields,
-            tableTitle: tableTitle,
+            tableTitle: tableTitles.warehouses,
             warehouseData: [],
         };
     },
@@ -26,16 +30,27 @@ export default {
     },
     methods: {
         async fetchWarehouseData() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                console.error('No token found, redirecting to login.');
+                this.$router.push('/login');
+                return;
+            }
             try {
-                const token = localStorage.getItem('token'); // Obtén el token de autorización desde localStorage
                 const response = await axios.get('http://localhost:8000/show-warehouses/', {
                     headers: {
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Token ${token}`
                     }
                 });
+                console.log('Warehouse data:', response.data);
                 this.warehouseData = response.data;
             } catch (error) {
-                console.error('Error fetching warehouse data:', error);
+                if (error.response && error.response.status === 401) {
+                    console.error('Unauthorized, redirecting to login.');
+                    this.$router.push('/login');
+                } else {
+                    console.error('Error fetching warehouse data:', error);
+                }
             }
         }
     }

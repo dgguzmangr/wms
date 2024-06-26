@@ -14,83 +14,64 @@
                 </template>
             </Toolbar>
             <!--DataTable-->
-            <DataTable 
-                ref="dt" :value="items" 
-                v-model:selection="selectedItems" 
-                dataKey="id" 
-                :paginator="true" 
-                :rows="10" 
-                :filters="filters"
+            <DataTable ref="dt" :value="tableData" v-model:selection="selectedItems" dataKey="id" :paginator="true"
+                :rows="10" :filters="filters"
                 paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                :rowsPerPageOptions="[5,10,25,50,75,100]"
+                :rowsPerPageOptions="[5, 10, 25, 50, 75, 100]"
                 currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} items">
-                    <!--Column selector-->
-                    <template #header>
-                        <div class="flex flex-wrap gap-2 align-items-center justify-content-between pb-3">
-                            <InputText v-model="filters['global'].value" placeholder="Buscar..." />
-                        </div>
-                        <div style="text-align:left" class="overflow-auto">
-                            <!--<MultiSelect 
+                <!--Column selector-->
+                <template #header>
+                    <div class="flex flex-wrap gap-2 align-items-center justify-content-between pb-3">
+                        <InputText v-model="filters['global'].value" placeholder="Buscar..." />
+                    </div>
+                    <div style="text-align:left" class="overflow-auto">
+                        <!--<MultiSelect 
                                         :modelValue="selectedColumns" 
                                         :options="userColumns" 
                                         optionLabel="label"
                                         @update:modelValue="onToggle"
                                         display="default"
                                         placeholder="Select Columns"/>-->
-                        </div>
+                    </div>
+                </template>
+                <Column selectionMode="multiple" style="width: 3rem" :exportable="false"
+                    :headerCheckboxSelection="selectAll" @change="selectAllRows">
+                </Column>
+                <!--<Column field="code" header="Código" />-->
+                <Column v-for="(col, index) of selectedColumns" :field="col.field" :header="col.header"
+                    :key="col.field + '_' + index">
+                </Column>
+
+                <Column :exportable="false" style="min-width:9rem">
+                    <template #body="slotProps" class="flex d-flex justify-content-between">
+                        <Button icon="pi pi-pencil" outlined rounded style="background-color: #22C55E; color: #f7f7f7"
+                            shape="circle" @click="editObject(slotProps.data)" class="mr-1" />
+                        <Button icon="pi pi-trash" outlined rounded style="background-color: #EF4444; color: #f7f7f7"
+                            shape="circle" @click="ConfirmDeleteDialog(slotProps.data)" />
                     </template>
-                    <Column 
-                            selectionMode="multiple"
-                            style="width: 3rem" 
-                            :exportable="false" 
-                            :headerCheckboxSelection="selectAll" 
-                            @click.stop="selectAllRows">
-                    </Column>
-                    <!--<Column field="code" header="Código" />-->
-                    <Column v-for="(col, index) of selectedColumns" :field="col.field" :header="col.header" :key="col.field + '_' + index">
-                    </Column>
-                    <Column :exportable="false" style="min-width:9rem">
-                        <template #body="slotProps" class="flex d-flex justify-content-between">
-                            <Button icon="pi pi-pencil" outlined rounded style="background-color: #22C55E; color: #f7f7f7" shape="circle" @click="editObject(slotProps.data)" class="mr-1"/>
-                            <Button icon="pi pi-trash" outlined rounded style="background-color: #EF4444; color: #f7f7f7" shape="circle" @click="ConfirmDeleteDialog(slotProps.data)"/>
-                        </template>
-                    </Column>
+                </Column>
             </DataTable>
             <!--Create items dialog-->
-            <Dialog 
-                v-model:visible="itemDialog" 
-                :style="{ width: '450px' }" 
-                :header="'DETALLES DE ' + tableTitle" 
-                :modal="true" 
-                class="p-fluid">
+            <Dialog v-model:visible="itemDialog" :style="{ width: '450px' }" :header="'DETALLES DE ' + tableTitle"
+                :modal="true" class="p-fluid">
                 <template v-slot:header>
                     <h5 style="text-align: center">{{ 'DETALLES DE ' + tableTitle }}</h5>
                 </template>
                 <div v-for="(value, key) in createDialogFields" :key="key">
                     <div v-if="typeof value === 'string'">
                         <label :for="key">{{ value }}</label>
-                        <InputText 
-                        :id="key" 
-                        v-model.trim="item[key]" 
-                        :class="{ 'p-invalid': submitted && !item[key] }"
-                        :required="isRequired(key)"
-                        autofocus 
-                        />
+                        <InputText :id="key" v-model.trim="item[key]" :class="{ 'p-invalid': submitted && !item[key] }"
+                            :required="isRequired(key)" autofocus />
                         <small class="p-error" v-if="submitted && !item[key]">Campo requerido.</small>
                     </div>
                     <div v-else>
                         <label :for="key" class="mb-3">{{ value.label }}</label>
-                        <Dropdown
-                            :id="key"
-                            v-model="item[key]"
-                            :options="value.options"
-                            optionLabel="label"
-                            :placeholder="'Seleccione ' + value.label"
-                            :required="isRequired(key)">
+                        <Dropdown :id="key" v-model="item[key]" :options="value.options" optionLabel="label"
+                            :placeholder="'Seleccione ' + value.label" :required="isRequired(key)">
                         </Dropdown>
                     </div>
                 </div>
-                    <div class="flex d-flex justify-content-between">
+                <div class="flex d-flex justify-content-between">
                     <Button label="Ubicación" icon="pi pi-map-marker" severity="primary" class="mx-1" @click="" />
                 </div>
                 <template #footer>
@@ -99,7 +80,7 @@
                 </template>
             </Dialog>
             <!--Item deletion confirmation dialog-->
-            <Dialog v-model:visible="deleteItemDialog" :style="{width: '450px'}" header="Confirm" :modal="true">
+            <Dialog v-model:visible="deleteItemDialog" :style="{ width: '450px' }" header="Confirm" :modal="true">
                 <div class="confirmation-content">
                     <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
                     <span v-if="product">¿Está seguro que desea eliminar este item?</span>
@@ -134,6 +115,10 @@ const props = defineProps({
     createDialogFields: {
         type: Object,
         required: true
+    },
+    tableData: {
+        type: Array,
+        required: true
     }
 });
 const confirm = useConfirm();
@@ -147,7 +132,7 @@ const selectAll = ref(false);
 const deleteItemsDialog = ref(false);
 const selectedItems = ref();
 const filters = ref({
-    'global': {value: null, matchMode: FilterMatchMode.CONTAINS},
+    'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
 });
 const submitted = ref(false);
 let selectedColumns;
@@ -167,7 +152,7 @@ const openNew = () => {
 };
 
 const isRequired = (key) => {
-  return typeof props.createDialogFields[key] === 'object' && props.createDialogFields[key].required;
+    return typeof props.createDialogFields[key] === 'object' && props.createDialogFields[key].required;
 };
 
 const hideDialog = () => {
@@ -191,13 +176,26 @@ const exportCSV = () => {
 };
 
 const editItem = (prod) => {
-    item.value = {...prod};
+    item.value = { ...prod };
     itemDialog.value = true;
 };
 
 const confirmDeleteItem = (prod) => {
     item.value = prod;
     deleteItemDialog.value = true;
+};
+
+const selectAllRows = event => {
+    if (event.checked) {
+        selectedItems.value = [...items.value];
+    } else {
+        selectedItems.value = [];
+    }
+};
+
+
+const confirmDeleteItems = () => {
+    deleteItemsDialog.value = true;
 };
 
 const requireDeleteConfirmation = () => {
@@ -218,7 +216,7 @@ const deleteItem = () => {
     items.value = items.value.filter(val => val.id !== item.value.id);
     deleteItemDialog.value = false;
     item.value = {};
-    toast.add({severity:'success', summary: 'Successful', detail: 'Item eliminado', life: 3000});
+    toast.add({ severity: 'success', summary: 'Successful', detail: 'Item eliminado', life: 3000 });
 };
 
 const confirmDeleteSelected = () => {
@@ -235,13 +233,12 @@ const deleteselectedItems = () => {
     deleteitemsDialog.value = false;
     selectedItems.value = null;
     selectAll.value = false;
-    toast.add({severity:'success', summary: 'Successful', detail: 'Items eliminados', life: 3000});
+    toast.add({ severity: 'success', summary: 'Successful', detail: 'Items eliminados', life: 3000 });
 };
-
 </script>
 
 <style>
 .icon-small .pi {
-    font-size: 50%; /* Ajusta el tamaño del icono según sea necesario */
+    font-size: 50%;
 }
 </style>

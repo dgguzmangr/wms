@@ -1,7 +1,7 @@
 import { readonly } from "vue";
 
 // Values for title table
-const tableTitle = {
+const tableTitles = {
     warehouses: 'BODEGAS'
 };
 
@@ -15,7 +15,7 @@ const warehouseColumns = {
     neighborthood: 'Barrio',
     address: 'Dirección',
     postal_code: 'Código postal',
-    location: 'Ubicaciones',
+    location: 'Ubicación',
     building: 'Edificios'
 };
 
@@ -59,4 +59,4 @@ const warehouseCreateFields = {
     },
 }
 
-export { tableTitle, warehouseColumns, warehouseCreateFields }
+export { tableTitles, warehouseColumns, warehouseCreateFields }
