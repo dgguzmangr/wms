@@ -28,22 +28,22 @@ const logoUrl = computed(() => {
                     <ul class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row cursor-pointer">
                         <li>
                             <a @click="smoothScroll('#hero')" class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3 p-ripple" v-ripple>
-                                <span>Home</span>
+                                <span>Inicio</span>
                             </a>
                         </li>
                         <li>
                             <a @click="smoothScroll('#features')" class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3 p-ripple" v-ripple>
-                                <span>Features</span>
+                                <span>Caracterìsticas</span>
                             </a>
                         </li>
                         <li>
                             <a @click="smoothScroll('#highlights')" class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3 p-ripple" v-ripple>
-                                <span>Highlights</span>
+                                <span>Destacados</span>
                             </a>
                         </li>
                         <li>
                             <a @click="smoothScroll('#pricing')" class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3 p-ripple" v-ripple>
-                                <span>Pricing</span>
+                                <span>Precios</span>
                             </a>
                         </li>
                     </ul>
@@ -74,7 +74,7 @@ const logoUrl = computed(() => {
             <div id="features" class="py-4 px-4 lg:px-8 mt-5 mx-0 lg:mx-8">
                 <div class="grid justify-content-center">
                     <div class="col-12 text-center mt-8 mb-4">
-                        <h2 class="text-900 font-normal mb-2">Marvelous Features</h2>
+                        <h2 class="text-900 font-normal mb-2">CARACTERISTICAS ADECUADAS PARA CADA NEGOCIO</h2>
                         <span class="text-600 text-2xl">Placerat in egestas erat...</span>
                     </div>
 
@@ -261,18 +261,18 @@ const logoUrl = computed(() => {
 
             <div id="pricing" class="py-4 px-4 lg:px-8 my-2 md:my-4">
                 <div class="text-center">
-                    <h2 class="text-900 font-normal mb-2">Matchless Pricing</h2>
-                    <span class="text-600 text-2xl">Amet consectetur adipiscing elit...</span>
+                    <h2 class="text-900 font-normal mb-3">PRECIOS INIGUALABLES</h2>
+                    <span class="text-600 text-2xl mb-3">Una solución acorde a tus necesidades</span>
                 </div>
 
                 <div class="grid justify-content-between mt-8 md:mt-0">
                     <div class="col-12 lg:col-4 p-0 md:p-3">
                         <div class="p-3 flex flex-column border-200 pricing-card cursor-pointer border-2 hover:border-primary transition-duration-300 transition-all" style="border-radius: 10px">
                             <h3 class="text-900 text-center my-5">Free</h3>
-                            <img src="/demo/images/landing/free.svg" class="w-10 h-10 mx-auto" alt="free" />
+                            <img src="layout/images/20068025.jpg" class="w-6 h-auto mx-auto" alt="free" />
                             <div class="my-5 text-center">
                                 <span class="text-5xl font-bold mr-2 text-900">$0</span>
-                                <span class="text-600">per month</span>
+                                <span class="text-600">por mes</span>
                                 <Button label="Get Started" class="block mx-auto mt-4 p-button-rounded border-none ml-3 font-light line-height-2 bg-blue-500 text-white"></Button>
                             </div>
                             <Divider class="w-full bg-surface-200"></Divider>
@@ -299,11 +299,11 @@ const logoUrl = computed(() => {
 
                     <div class="col-12 lg:col-4 p-0 md:p-3 mt-4 md:mt-0">
                         <div class="p-3 flex flex-column border-200 pricing-card cursor-pointer border-2 hover:border-primary transition-duration-300 transition-all" style="border-radius: 10px">
-                            <h3 class="text-900 text-center my-5">Startup</h3>
-                            <img src="/demo/images/landing/startup.svg" class="w-10 h-10 mx-auto" alt="startup" />
+                            <h3 class="text-900 text-center my-5">Pequeños negocios</h3>
+                            <img src="layout/images/20068025.jpg" class="w-6 h-auto mx-auto" alt="startup" />
                             <div class="my-5 text-center">
-                                <span class="text-5xl font-bold mr-2 text-900">$1</span>
-                                <span class="text-600">per month</span>
+                                <span class="text-5xl font-bold mr-2 text-900">$10</span>
+                                <span class="text-600">por mes</span>
                                 <Button label="Try Free" class="block mx-auto mt-4 p-button-rounded border-none ml-3 font-light line-height-2 bg-blue-500 text-white"></Button>
                             </div>
                             <Divider class="w-full bg-surface-200"></Divider>
@@ -330,11 +330,11 @@ const logoUrl = computed(() => {
 
                     <div class="col-12 lg:col-4 p-0 md:p-3 mt-4 md:mt-0">
                         <div class="p-3 flex flex-column border-200 pricing-card cursor-pointer border-2 hover:border-primary transition-duration-300 transition-all" style="border-radius: 10px">
-                            <h3 class="text-900 text-center my-5">Enterprise</h3>
-                            <img src="/demo/images/landing/enterprise.svg" class="w-10 h-10 mx-auto" alt="enterprise" />
+                            <h3 class="text-900 text-center my-5">Empresas</h3>
+                            <img src="layout/images/1777.jpg" class="w-11 h-auto d-block mx-auto pb-1" alt="enterprise" />
                             <div class="my-5 text-center">
-                                <span class="text-5xl font-bold mr-2 text-900">$999</span>
-                                <span class="text-600">per month</span>
+                                <span class="text-5xl font-bold mr-2 text-900">$250</span>
+                                <span class="text-600">por mes</span>
                                 <Button label="Get a Quote" class="block mx-auto mt-4 p-button-rounded border-none ml-3 font-light line-height-2 bg-blue-500 text-white"></Button>
                             </div>
                             <Divider class="w-full bg-surface-200"></Divider>
@@ -372,34 +372,30 @@ const logoUrl = computed(() => {
                     <div class="col-12 md:col-10 lg:col-7">
                         <div class="grid text-center md:text-left">
                             <div class="col-12 md:col-3">
-                                <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Company</h4>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">About Us</a>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">News</a>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Investor Relations</a>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Careers</a>
-                                <a class="line-height-3 text-xl block cursor-pointer text-700">Media Kit</a>
+                                <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Empresa</h4>
+                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Acerca de nosotros</a>
+                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Noticias</a>
                             </div>
 
                             <div class="col-12 md:col-3 mt-4 md:mt-0">
-                                <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Resources</h4>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Get Started</a>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Learn</a>
-                                <a class="line-height-3 text-xl block cursor-pointer text-700">Case Studies</a>
+                                <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Recursos</h4>
+                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Comience a trabajar</a>
+                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Aprenda</a>
                             </div>
 
                             <div class="col-12 md:col-3 mt-4 md:mt-0">
-                                <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Community</h4>
+                                <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Comunidad</h4>
                                 <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Discord</a>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Events<img src="/demo/images/landing/new-badge.svg" class="ml-2" /></a>
+                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Eventos</a>
                                 <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">FAQ</a>
                                 <a class="line-height-3 text-xl block cursor-pointer text-700">Blog</a>
                             </div>
 
                             <div class="col-12 md:col-3 mt-4 md:mt-0">
                                 <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Legal</h4>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Brand Policy</a>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Privacy Policy</a>
-                                <a class="line-height-3 text-xl block cursor-pointer text-700">Terms of Service</a>
+                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Política de marca</a>
+                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Política de privacidad</a>
+                                <a class="line-height-3 text-xl block cursor-pointer text-700">Términos de servicio</a>
                             </div>
                         </div>
                     </div>
@@ -410,7 +406,7 @@ const logoUrl = computed(() => {
     <AppConfig simple />
 </template>
 
-<!-- <style scoped>
+<style scoped>
 #hero {
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), radial-gradient(77.36% 256.97% at 77.36% 57.52%, #eeefaf 0%, #c3e3fa 100%);
     height: 700px;
@@ -455,4 +451,4 @@ const logoUrl = computed(() => {
         max-width: 100%;
     }
 }
-</style> -->
+</style>

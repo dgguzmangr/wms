@@ -2,7 +2,7 @@ import { readonly } from "vue";
 
 // Values for title table
 const tableTitles = {
-    warehouses: 'BODEGAS'
+    warehouses: 'BODEGAS',
 };
 
 // Values for warehouse columns

@@ -1,14 +1,15 @@
 <template>
     <div>
-        <h2 class="text-center p-2">{{ tableTitle }}</h2>
+        <h2 class="text-center p-2">ADMINISTRACIÓN DE {{ tableTitle }}</h2>
         <div class="card">
             <!--Top toolbar-->
             <Toolbar class="mb-3">
                 <template #start>
                     <Button label="Crear" icon="pi pi-plus" severity="success" class="mr-2" @click="openNew" />
-                    <Button label="Eliminar" icon="pi pi-trash" severity="danger" @click="confirmDeleteItems"
-                        :disabled="!selectedItems || !selectedItems.length" />
+                    <!--<Button label="Eliminar" icon="pi pi-trash" severity="danger" @click="confirmDeleteItems"
+                        :disabled="!selectedItems || !selectedItems.length" />-->
                 </template>
+                
                 <template #end>
                     <Button label="Exportar CSV" icon="pi pi-upload" severity="help" @click="exportCSV($event)" />
                 </template>
@@ -24,20 +25,10 @@
                     <div class="flex flex-wrap gap-2 align-items-center justify-content-between pb-3">
                         <InputText v-model="filters['global'].value" placeholder="Buscar..." />
                     </div>
-                    <div style="text-align:left" class="overflow-auto">
-                        <!--<MultiSelect 
-                                        :modelValue="selectedColumns" 
-                                        :options="userColumns" 
-                                        optionLabel="label"
-                                        @update:modelValue="onToggle"
-                                        display="default"
-                                        placeholder="Select Columns"/>-->
-                    </div>
                 </template>
-                <Column selectionMode="multiple" style="width: 3rem" :exportable="false"
-                    :headerCheckboxSelection="selectAll" @change="selectAllRows">
-                </Column>
-                <!--<Column field="code" header="Código" />-->
+                <!--<Column selectionMode="multiple" style="width: 3rem" :exportable="false"
+                    :headerCheckboxSelection="true" @change="selectAllRows">
+                </Column>-->
                 <Column v-for="(col, index) of selectedColumns" :field="col.field" :header="col.header"
                     :key="col.field + '_' + index">
                 </Column>
@@ -45,53 +36,37 @@
                 <Column :exportable="false" style="min-width:9rem">
                     <template #body="slotProps" class="flex d-flex justify-content-between">
                         <Button icon="pi pi-pencil" outlined rounded style="background-color: #22C55E; color: #f7f7f7"
-                            shape="circle" @click="editObject(slotProps.data)" class="mr-1" />
+                            shape="circle" @click="editItem(slotProps.data)" class="mr-1" />
                         <Button icon="pi pi-trash" outlined rounded style="background-color: #EF4444; color: #f7f7f7"
-                            shape="circle" @click="ConfirmDeleteDialog(slotProps.data)" />
+                            shape="circle" @click="confirmDeleteItem(slotProps.data)" />
                     </template>
                 </Column>
             </DataTable>
             <!--Create items dialog-->
-            <Dialog v-model:visible="itemDialog" :style="{ width: '450px' }" :header="'DETALLES DE ' + tableTitle"
-                :modal="true" class="p-fluid">
-                <template v-slot:header>
-                    <h5 style="text-align: center">{{ 'DETALLES DE ' + tableTitle }}</h5>
-                </template>
-                <div v-for="(value, key) in createDialogFields" :key="key">
-                    <div v-if="typeof value === 'string'">
-                        <label :for="key">{{ value }}</label>
-                        <InputText :id="key" v-model.trim="item[key]" :class="{ 'p-invalid': submitted && !item[key] }"
-                            :required="isRequired(key)" autofocus />
-                        <small class="p-error" v-if="submitted && !item[key]">Campo requerido.</small>
-                    </div>
-                    <div v-else>
-                        <label :for="key" class="mb-3">{{ value.label }}</label>
-                        <Dropdown :id="key" v-model="item[key]" :options="value.options" optionLabel="label"
-                            :placeholder="'Seleccione ' + value.label" :required="isRequired(key)">
-                        </Dropdown>
-                    </div>
-                </div>
-                <div class="flex d-flex justify-content-between">
-                    <Button label="Ubicación" icon="pi pi-map-marker" severity="primary" class="mx-1" @click="" />
-                </div>
-                <template #footer>
-                    <Button label="Cancelar" icon="pi pi-times" text @click="hideDialog" />
-                    <Button label="Guardar" icon="pi pi-check" text @click="saveUser" />
-                </template>
-            </Dialog>
+            <!--<EntityManager :visible="entityManagerVisible" @update:visible="entityManagerVisible = $event" />-->
             <!--Item deletion confirmation dialog-->
-            <Dialog v-model:visible="deleteItemDialog" :style="{ width: '450px' }" header="Confirm" :modal="true">
+            <Dialog v-model:visible="deleteItemDialog" :style="{ width: '450px' }" header="Confirmación" :modal="true">
                 <div class="confirmation-content">
                     <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
-                    <span v-if="product">¿Está seguro que desea eliminar este item?</span>
+                    <span v-if="item">¿Está seguro que desea eliminar este item?</span>
                 </div>
                 <template #footer>
                     <Button label="No" icon="pi pi-times" text @click="deleteItemDialog = false" />
-                    <Button label="Yes" icon="pi pi-check" text @click="deleteItem" />
+                    <Button label="Si" icon="pi pi-check" text @click="deleteItem" />
                 </template>
             </Dialog>
             <!--Multiple item deletion confirmation dialog-->
-            <!---->
+            <Dialog v-model:visible="deleteItemsDialog" :style="{ width: '450px' }" header="Confirmar eliminación"
+                :modal="true">
+                <div class="confirmation-content">
+                    <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
+                    <span>¿Está seguro que desea eliminar los items seleccionados?</span>
+                </div>
+                <template #footer>
+                    <Button label="No" icon="pi pi-times" text @click="deleteItemsDialog = false" />
+                    <Button label="Sí" icon="pi pi-check" text @click="deleteSelectedItems" />
+                </template>
+            </Dialog>
         </div>
     </div>
 </template>
@@ -101,7 +76,7 @@ import { ref, onMounted, defineProps } from 'vue';
 import { FilterMatchMode } from 'primevue/api';
 import { useConfirm } from "primevue/useconfirm";
 import { useToast } from 'primevue/usetoast';
-import { tableTitles } from '@/utils/crudTables.js';
+//import EntityManager from '@/components/EntityManager.vue';
 
 const props = defineProps({
     tableTitle: {
@@ -119,36 +94,37 @@ const props = defineProps({
     tableData: {
         type: Array,
         required: true
+    },
+    deleteItem: {
+        type: Function,
+        required: true
+    },
+    confirmDeleteDialog: {
+        type: Function,
+        required: true
     }
 });
 const confirm = useConfirm();
 const toast = useToast();
 const dt = ref();
-const items = ref([]);
-const item = ref();
+const item = ref({});
 const itemDialog = ref(false);
 const deleteItemDialog = ref(false);
-const selectAll = ref(false);
 const deleteItemsDialog = ref(false);
-const selectedItems = ref();
+//const entityManagerVisible = ref(false);
+const selectedItems = ref([]);
 const filters = ref({
     'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
 });
 const submitted = ref(false);
-let selectedColumns;
-const onToggle = (val) => {
-    selectedColumns.value = val.map(field => ({ field, header: props.tableColumns[field] }));
-};
-const tableTitle = `ADMINISTRACIÓN DE ${tableTitles[props.tableTitle]}`;
-selectedColumns = ref(Object.keys(props.tableColumns).map(field => ({ field, header: props.tableColumns[field] })));
+let selectedColumns = ref([]);
 
 onMounted(() => {
+    selectedColumns.value = Object.keys(props.tableColumns).map(field => ({ field, header: props.tableColumns[field] }));
 });
 
 const openNew = () => {
-    item.value = {};
-    submitted.value = false;
-    itemDialog.value = true;
+    //entityManagerVisible.value = true;
 };
 
 const isRequired = (key) => {
@@ -160,85 +136,61 @@ const hideDialog = () => {
     submitted.value = false;
 };
 
-const findIndexById = (id) => {
-    let index = -1;
-    for (let i = 0; i < items.value.length; i++) {
-        if (items.value[i].id === id) {
-            index = i;
-            break;
-        }
+const confirmDeleteItem = (data) => {
+    item.value = data;
+    deleteItemDialog.value = true;
+};
+
+const deleteItem = async () => {
+    try {
+        await props.deleteItem(item.value);
+        item.value = {};
+        deleteItemDialog.value = false;
+        showToast('success', 'Éxito', 'Elemento eliminado correctamente');
+    } catch (error) {
+        console.error('Error eliminando el elemento:', error);
+        showToast('error', 'Error', 'Error al eliminar el elemento');
     }
-    return index;
+};
+
+const showToast = (severity, summary, detail) => {
+    toast.add({ severity: severity, summary: summary, detail: detail, life: 3000 });
+};
+
+const confirmDeleteItems = () => {
+    deleteItemsDialog.value = true;
+};
+
+const deleteSelectedItems = async () => {
+    try {
+        const deletedItems = await Promise.all(selectedItems.value.map(item => props.deleteItem(item)));
+        selectedItems.value = [];
+        deleteItemsDialog.value = false;
+        showToast('success', 'Éxito', 'Elementos seleccionados eliminados correctamente');
+    } catch (error) {
+        console.error('Error eliminando elementos seleccionados:', error);
+        showToast('error', 'Error', 'Error al eliminar elementos seleccionados');
+    }
 };
 
 const exportCSV = () => {
     dt.value.exportCSV();
 };
 
-const editItem = (prod) => {
-    item.value = { ...prod };
-    itemDialog.value = true;
+const editItem = (item) => {
+    // Implementa la lógica para editar un elemento
 };
 
-const confirmDeleteItem = (prod) => {
-    item.value = prod;
-    deleteItemDialog.value = true;
-};
-
-const selectAllRows = event => {
+const selectAllRows = (event) => {
     if (event.checked) {
-        selectedItems.value = [...items.value];
+        selectedItems.value = [...props.tableData];
     } else {
         selectedItems.value = [];
     }
 };
 
-
-const confirmDeleteItems = () => {
-    deleteItemsDialog.value = true;
-};
-
-const requireDeleteConfirmation = () => {
-    confirm.require({
-        group: 'headless',
-        header: '¿Está seguro que desea eliminar este item?',
-        message: 'Eliminar.',
-        accept: () => {
-            toast.add({ severity: 'info', summary: 'Confirmed', detail: 'Item eliminado', life: 3000 });
-        },
-        reject: () => {
-            toast.add({ severity: 'error', summary: 'Rejected', detail: 'Eliminación cancelada', life: 3000 });
-        }
-    });
-};
-
-const deleteItem = () => {
-    items.value = items.value.filter(val => val.id !== item.value.id);
-    deleteItemDialog.value = false;
-    item.value = {};
-    toast.add({ severity: 'success', summary: 'Successful', detail: 'Item eliminado', life: 3000 });
-};
-
-const confirmDeleteSelected = () => {
-    selectAll.value = true;
-    deleteitemsDialog.value = true;
-};
-
-const deleteselectedItems = () => {
-    if (selectAll.value) {
-        items.value = [];
-    } else {
-        items.value = items.value.filter(val => !selectedItems.value.includes(val));
-    }
-    deleteitemsDialog.value = false;
-    selectedItems.value = null;
-    selectAll.value = false;
-    toast.add({ severity: 'success', summary: 'Successful', detail: 'Items eliminados', life: 3000 });
-};
 </script>
 
-<style>
-.icon-small .pi {
-    font-size: 50%;
-}
+<style scoped>
+/* Estilos opcionales */
 </style>
