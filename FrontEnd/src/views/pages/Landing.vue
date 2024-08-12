@@ -325,7 +325,8 @@ const logoUrl = computed(() => {
                         <div class="p-3 flex flex-column border-200 pricing-card cursor-pointer border-2 hover:border-primary transition-duration-300 transition-all"
                             style="border-radius: 10px">
                             <h3 class="text-900 text-center my-5">Pequeños negocios</h3>
-                            <img src="layout/images/2006.jpg" class="w-6 h-auto mx-auto" alt="startup" />
+                            <img src="" class="w-6 h-auto mx-auto" alt="startup" />
+                            <!--<img src="layout/images/2006.jpg" class="w-6 h-auto mx-auto" alt="startup" />-->
                             <div class="my-5 text-center">
                                 <span class="text-5xl font-bold mr-2 text-900">$10</span>
                                 <span class="text-600">por mes</span>
@@ -358,8 +359,8 @@ const logoUrl = computed(() => {
                         <div class="p-3 flex flex-column border-200 pricing-card cursor-pointer border-2 hover:border-primary transition-duration-300 transition-all"
                             style="border-radius: 10px">
                             <h3 class="text-900 text-center my-5">Empresas</h3>
-                            <img src="layout/images/1777.jpg" class="w-11 h-auto d-block mx-auto pb-1"
-                                alt="enterprise" />
+                            <img src="" class="w-11 h-auto d-block mx-auto pb-1" alt="enterprise" />
+                            <!--<img src="layout/images/1777.jpg" class="w-11 h-auto d-block mx-auto pb-1" alt="enterprise" />-->
                             <div class="my-5 text-center">
                                 <span class="text-5xl font-bold mr-2 text-900">$250</span>
                                 <span class="text-600">por mes</span>
