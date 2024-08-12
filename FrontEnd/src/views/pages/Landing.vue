@@ -291,7 +291,7 @@ const logoUrl = computed(() => {
                         <div class="p-3 flex flex-column border-200 pricing-card cursor-pointer border-2 hover:border-primary transition-duration-300 transition-all"
                             style="border-radius: 10px">
                             <h3 class="text-900 text-center my-5">Free</h3>
-                            <img src="layout/images/3284.jpg" class="w-6 h-auto mx-auto" alt="free" />
+                            <img src="layout/images/328.jpg" class="w-6 h-auto mx-auto" alt="free" />
                             <div class="my-5 pt-2 text-center">
                                 <span class="text-5xl font-bold mr-2 text-900">$0</span>
                                 <span class="text-600">por mes</span>
