@@ -51,7 +51,9 @@ const logoUrl = computed(() => {
                         <router-link to="/login">
                             <Button label="Login" class="p-button-text p-button-rounded border-none font-light line-height-2 text-blue-500"></Button>
                         </router-link>
-                        <Button label="Register" class="p-button-rounded border-none ml-5 font-light text-white line-height-2 bg-blue-500"></Button>
+                        <router-link to="/register">
+                            <Button label="Registro" class="p-button-rounded border-none ml-5 font-light text-white line-height-2 bg-blue-500"></Button>
+                        </router-link>
                     </div>
                 </div>
             </div>

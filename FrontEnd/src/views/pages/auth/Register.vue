@@ -6,30 +6,88 @@ import AppConfig from '@/layout/AppConfig.vue';
 import axios from 'axios';
 
 const { layoutConfig } = useLayout();
-const username = ref('');
+const email = ref('');
 const password = ref('');
-const checked = ref(false);
+const confirmPassword = ref('');
+const company_name = ref('');
+const name = ref('');
+const last_name = ref('');
+const document = ref('');
+const nit = ref('');
+const status = ref(true);
+const user_groups = ref([]);
+const backupEmail = ref('');
+const phone = ref('');
+const ubication = ref('');
+const groups = ref([{
+    name: '',
+    permissions: [{ name: '' }]
+}]);
+const user_permissions = ref([{ name: '' }]);
+const product_ids = ref([]);
+
 const router = useRouter();
 
 const logoUrl = computed(() => {
     return `layout/images/logo.png`;
 });
 
-const signIn = async () => {
+const signUp = async () => {
     try {
-        const response = await axios.post('http://localhost:8000/login/', {
-            username: username.value,
+        if (password.value !== confirmPassword.value) {
+            alert("Las contraseñas no coinciden");
+            return;
+        }
+
+        if (!email.value || !password.value || !name.value || !last_name.value || !document.value || !company_name.value) {
+            alert("Por favor, completa todos los campos requeridos.");
+            return;
+        }
+        /*
+        const formattedGroups = groups.value.map(group => ({
+            name: group.name,
+            permissions: group.permissions.map(permission => ({ name: permission.name }))
+        }));
+
+        const formattedPermissions = user_permissions.value.map(permission => ({
+            name: permission.name
+        }));
+        */
+        const payload = {
+            type: '',
+            company_name: company_name.value,
+            name: name.value,
+            last_name: last_name.value,
+            document: document.value,
+            nit: nit.value,
+            email: email.value,
             password: password.value,
-        });
-        //console.log('Response:', response.data);
+            status: status.value,
+            user_groups: user_groups.value.length > 0 ? user_groups.value : [], /*ahora esto funciona*/
+            backupEmail: backupEmail.value || null,
+            phone: phone.value || null,
+            ubication: ubication.value || null,
+            groups: [{ name: '', permissions: [{ name: '' }] }], /*acá esta mal*/
+            user_permissions: [{ name: '' }], /*acá esta mal*/
+            product_ids: product_ids.value.length > 0 ? product_ids.value : [],
+        };
+
+        console.log('Payload:', payload);
+
+        const response = await axios.post('http://localhost:8000/create-user/', payload);
+
+        console.log('Response:', response.data);
 
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('permissions', JSON.stringify(response.data.permissions));
 
-        router.push('/');
+        router.push('/login');
     } catch (error) {
-        console.error('Error:', error.response ? error.response.data : error.message);
-        router.push('/access');
+        if (error.response) {
+            console.error('Error response data:', error.response.data);
+        } else {
+            console.error('Error message:', error.message);
+        }
     }
 };
 </script>
@@ -52,49 +110,50 @@ const signIn = async () => {
                 </li>
             </ul>
             <div class="flex justify-content-between lg:block border-top-1 lg:border-top-none surface-border py-3 lg:py-0 mt-3 lg:mt-0">
-                <router-link to="/register">
-                    <Button label="Registro" class="p-button-rounded border-none ml-5 font-light text-white line-height-2 bg-blue-500"></Button>
+                <router-link to="/login">
+                    <Button label="Login" class="p-button-rounded border-none ml-5 font-light text-white line-height-2 bg-blue-500"></Button>
                 </router-link>
             </div>
         </div>
     </div>
-    <div
-        class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
+    <div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
         <div class="flex flex-column align-items-center justify-content-center">
-            <div
-                class="md:mx-6 lg:mx-8 lg:px-8 flex align-items-center justify-content-between relative lg:static mb-3 pb-3">
+            <div class="md:mx-6 lg:mx-8 lg:px-8 flex align-items-center justify-content-between relative lg:static mb-3 pb-3">
                 <img :src="logoUrl" alt="DGG WMS Logo Logo" height="50" class="mr-0 lg:mr-2" />
                 <span class="text-center text-900 font-medium text-2xl line-height-2 ml-2">DGG <br> WMS</span>
             </div>
-            <div
-                style="border-radius: 56px; padding: 0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%)">
+            <div style="border-radius: 56px; padding: 0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%)">
                 <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius: 53px">
                     <div class="text-center mb-5">
-                        <span class="text-600 font-medium">Inicia sesión para continuar</span>
+                        <span class="text-600 font-medium">Regístrate para continuar</span>
                     </div>
 
                     <div>
-                        <label for="username1" class="block text-900 text-xl font-medium mb-2">Correo
-                            electrónico</label>
-                        <InputText id="username1" type="text" placeholder="Correo electrónico"
-                            class="w-full md:w-30rem mb-5" style="padding: 1rem" v-model="username" />
+                        <label for="company_name" class="block text-900 text-xl font-medium mb-2">Nombre de la Empresa</label>
+                        <InputText id="company_name" type="text" placeholder="Nombre de la Empresa" class="w-full md:w-30rem mb-5" style="padding: 1rem" v-model="company_name" />
+
+                        <label for="name" class="block text-900 text-xl font-medium mb-2">Nombre</label>
+                        <InputText id="name" type="text" placeholder="Nombre" class="w-full md:w-30rem mb-5" style="padding: 1rem" v-model="name" />
+
+                        <label for="last_name" class="block text-900 text-xl font-medium mb-2">Apellido</label>
+                        <InputText id="last_name" type="text" placeholder="Apellido" class="w-full md:w-30rem mb-5" style="padding: 1rem" v-model="last_name" />
+
+                        <label for="document" class="block text-900 text-xl font-medium mb-2">Documento</label>
+                        <InputText id="document" type="text" placeholder="Documento" class="w-full md:w-30rem mb-5" style="padding: 1rem" v-model="document" />
+
+                        <label for="nit" class="block text-900 text-xl font-medium mb-2">NIT</label>
+                        <InputText id="nit" type="text" placeholder="NIT" class="w-full md:w-30rem mb-5" style="padding: 1rem" v-model="nit" />
+
+                        <label for="email1" class="block text-900 text-xl font-medium mb-2">Correo electrónico</label>
+                        <InputText id="email1" type="text" placeholder="Correo electrónico" class="w-full md:w-30rem mb-5" style="padding: 1rem" v-model="email" />
 
                         <label for="password1" class="block text-900 font-medium text-xl mb-2">Contraseña</label>
-                        <Password id="password1" v-model="password" placeholder="Contraseña" :toggleMask="true"
-                            class="w-full mb-3" inputClass="w-full" :inputStyle="{ padding: '1rem' }"></Password>
+                        <Password id="password1" v-model="password" placeholder="Contraseña" :toggleMask="true" class="w-full mb-3" inputClass="w-full" :inputStyle="{ padding: '1rem' }"></Password>
 
-                        <div class="flex align-items-center justify-content-between mb-5 gap-5">
-                            <div class="flex align-items-center">
-                                <Checkbox v-model="checked" id="rememberme1" binary class="mr-2"></Checkbox>
-                                <label for="rememberme1">Recuérdame</label>
-                            </div>
-                            <a class="font-medium no-underline ml-2 text-right cursor-pointer"
-                                style="color: var(--primary-color)">¿Olvidaste tu contraseña?</a>
-                        </div>
-                        <Button label="Sign In" class="w-full p-3 text-xl" @click="signIn"></Button>
-                        <router-link to="/register">
-                            <Button label="Sign Up" class="w-full mt-2 p-3 text-xl"></Button>
-                        </router-link>
+                        <label for="confirmPassword1" class="block text-900 font-medium text-xl mb-2">Confirmar Contraseña</label>
+                        <Password id="confirmPassword1" v-model="confirmPassword" placeholder="Confirmar Contraseña" :toggleMask="true" class="w-full mb-3" inputClass="w-full" :inputStyle="{ padding: '1rem' }"></Password>
+
+                        <Button label="Sign Up" class="w-full p-3 text-xl" @click="signUp"></Button>
                     </div>
                 </div>
             </div>

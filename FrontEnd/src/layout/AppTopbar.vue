@@ -69,7 +69,6 @@ const onSignOut = () => {
     // localStorage.removeItem('token');
     topbarMenuActive.value = false;
     router.push('/landing');
-    console.log('you are outside')
 };
 </script>
 
