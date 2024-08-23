@@ -1,10 +1,10 @@
 <template>
     <CrudTable 
-        :tableTitle="tableTitles.warehouses" 
-        :tableColumns="warehouseColumns" 
-        :createDialogFields="warehouseCreateFields"
-        :tableData="warehouseData" 
-        :deleteItem="deleteWarehouse"
+        :tableTitle="tableTitles.footprints" 
+        :tableColumns="footprintColumns" 
+        :createDialogFields="footprintCreateFields"
+        :tableData="footprintData" 
+        :deleteItem="deleteFootprint"
         :confirmDeleteDialog="confirmDeleteDialog"
     />
 </template>
@@ -13,15 +13,15 @@
 import { ref } from 'vue';
 import { useToast } from 'primevue/usetoast';
 import CrudTable from '@/components/CrudTable.vue';
-import { warehouseColumns, warehouseCreateFields, tableTitles } from '@/utils/warehouseCrudTable.js';
+import { footprintColumns, footprintCreateFields, tableTitles } from '@/utils/footprintCrudTable.js';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
-const warehouseData = ref([]);
+const footprintData = ref([]);
 const toast = useToast();
 
-const fetchWarehouseData = async () => {
+const fetchFootprintData = async () => {
     const token = localStorage.getItem('token');
     if (!token) {
         console.error('No token found, redirecting to login.');
@@ -29,25 +29,25 @@ const fetchWarehouseData = async () => {
         return;
     }
     try {
-        const response = await axios.get('http://localhost:8000/show-warehouses/', {
+        const response = await axios.get('http://localhost:8000/show-footprints/', {
         headers: {
             'Authorization': `Token ${token}`
         }
         });
-        warehouseData.value = response.data;
+        footprintData.value = response.data;
     } catch (error) {
         if (error.response && error.response.status === 401) {
         console.error('Unauthorized, redirecting to login.');
         router.push('/login');
         } else {
-        console.error('Error fetching warehouse data:', error);
+        console.error('Error fetching footprint data:', error);
         }
     }
 };
 
-const deleteWarehouse = async (warehouse) => {
-    if (!warehouse) {
-        console.error('No warehouse object provided.');
+const deleteFootprint = async (footprint) => {
+    if (!footprint) {
+        console.error('No footprint object provided.');
         return;
     }
 
@@ -59,26 +59,26 @@ const deleteWarehouse = async (warehouse) => {
     }
 
     try {
-        const response = await axios.delete(`http://localhost:8000/delete-warehouse/${warehouse.warehouse_id}/`, {
+        const response = await axios.delete(`http://localhost:8000/delete-footprint/${footprint.footprint_id}/`, {
         headers: {
             'Authorization': `Token ${token}`
         }
         });
         if (response.status === 204) {
-        warehouseData.value = warehouseData.value.filter(item => item.warehouse_id !== warehouse.warehouse_id);
-        showToast('success', 'Éxito', 'Almacén eliminado correctamente');
+            footprintData.value = footprintData.value.filter(item => item.footprint_id !== footprint.footprint_id);
+        showToast('success', 'Éxito', 'Huella eliminada correctamente');
         } else {
-        showToast('error', 'Error', 'Error al eliminar el almacén');
+        showToast('error', 'Error', 'Error al eliminar la huella');
         }
     } catch (error) {
         if (error.response && error.response.status === 401) {
         console.error('Unauthorized, redirecting to login.');
         router.push('/login');
         } else if (error.response && error.response.status === 404) {
-        showToast('error', 'Error', 'Almacén no encontrado');
+        showToast('error', 'Error', 'Huella no encontrada');
         } else {
-        console.error('Error deleting warehouse:', error);
-        showToast('error', 'Error', 'Error al eliminar el almacén');
+        console.error('Error deleting footprint:', error);
+        showToast('error', 'Error', 'Error al eliminar la huella');
         }
     }
 };
@@ -92,7 +92,7 @@ const confirmDeleteDialog = (data) => {
 };
 
 
-fetchWarehouseData();
+fetchFootprintData();
 </script>
 
 <style scoped>

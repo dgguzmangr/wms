@@ -39,12 +39,6 @@ const routes = [
                 name: 'warehouse_manager',
                 component: () => import('@/views/Warehouse_manager.vue'),
                 meta: { requiresAuth: true, requiredPermissions: [
-                    'authApp.show_warehouses', 
-                    'authApp.create_warehouses',
-                    'authApp.update_warehouses', 
-                    'authApp.partial_update_warehouses',
-                    'authApp.delete_warehouses',
-                    'authApp.show_warehouse_buildings',
                 ]}
             },
             {
@@ -58,6 +52,59 @@ const routes = [
                     'authApp.partial_update_warehouses',
                     'authApp.delete_warehouses',
                     'authApp.show_warehouse_buildings',
+                ]}
+            },
+            {
+                path: '/productmanager',
+                name: 'productmanager',
+                component: () => import('@/views/ProductManagerView.vue'),
+                meta: { requiresAuth: true, requiredPermissions: [
+                    'authApp.show_products', 
+                    'authApp.create_products',
+                    'authApp.update_products', 
+                    'authApp.partial_update_products',
+                    'authApp.delete_products',
+                    'authApp.show_product_discounts',
+                    'authApp.show_product_footprints',
+                    'authApp.show_product_prices',
+                    'authApp.show_product_taxes',
+                    'authApp.show_product_details'
+                ]}
+            },
+            {
+                path: '/discountmanager',
+                name: 'discountmanager',
+                component: () => import('@/views/DiscountManagerView.vue'),
+                meta: { requiresAuth: true, requiredPermissions: [
+                    'authApp.show_discounts', 
+                    'authApp.create_discounts',
+                    'authApp.update_discounts', 
+                    'authApp.partial_update_discounts',
+                    'authApp.delete_discounts',
+                ]}
+            },
+            {
+                path: '/footprintmanager',
+                name: 'footprintmanager',
+                component: () => import('@/views/FootprintManagerView.vue'),
+                meta: { requiresAuth: true, requiredPermissions: [
+                    'authApp.show_footprints', 
+                    'authApp.create_footprints',
+                    'authApp.update_footprints', 
+                    'authApp.partial_update_footprints',
+                    'authApp.delete_footprints',
+                ]}
+            },
+            {
+                path: '/pricemanager',
+                name: 'pricemanager',
+                component: () => import('@/views/PriceManagerView.vue'),
+                meta: { requiresAuth: true, requiredPermissions: [
+                    'authApp.show_prices', 
+                    'authApp.create_prices',
+                    'authApp.update_prices', 
+                    'authApp.partial_update_prices',
+                    'authApp.delete_prices',
                 ]}
             },
             {
@@ -84,12 +131,6 @@ const routes = [
                 component: () => import('@/views/Crud_pruebaView.vue'),
                 meta: { requiresAuth: true, requiredPermissions: ['crud_prueba'] }
             },
-            {
-                path: '/productmanager',
-                name: 'productmanager',
-                component: () => import('@/views/ProductManagerView.vue'),
-                meta: { requiresAuth: true, requiredPermissions: ['manage_products'] }
-            }
         ]
     },
     {
@@ -116,6 +157,11 @@ const routes = [
         path: '/register',
         name: 'register',
         component: () => import('@/views/pages/auth/Register.vue')
+    },
+    {
+        path: '/contact',
+        name: 'contact',
+        component: () => import('@/views/pages/Contact.vue')
     }
 ];
 

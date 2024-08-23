@@ -1,10 +1,10 @@
 <template>
     <CrudTable 
-        :tableTitle="tableTitles.warehouses" 
-        :tableColumns="warehouseColumns" 
-        :createDialogFields="warehouseCreateFields"
-        :tableData="warehouseData" 
-        :deleteItem="deleteWarehouse"
+        :tableTitle="tableTitles.discounts" 
+        :tableColumns="discountColumns" 
+        :createDialogFields="discountCreateFields"
+        :tableData="discountData" 
+        :deleteItem="deleteDiscount"
         :confirmDeleteDialog="confirmDeleteDialog"
     />
 </template>
@@ -13,15 +13,15 @@
 import { ref } from 'vue';
 import { useToast } from 'primevue/usetoast';
 import CrudTable from '@/components/CrudTable.vue';
-import { warehouseColumns, warehouseCreateFields, tableTitles } from '@/utils/warehouseCrudTable.js';
+import { discountColumns, discountCreateFields, tableTitles } from '@/utils/discountCrudTable.js';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
-const warehouseData = ref([]);
+const discountData = ref([]);
 const toast = useToast();
 
-const fetchWarehouseData = async () => {
+const fetchDiscountData = async () => {
     const token = localStorage.getItem('token');
     if (!token) {
         console.error('No token found, redirecting to login.');
@@ -29,25 +29,25 @@ const fetchWarehouseData = async () => {
         return;
     }
     try {
-        const response = await axios.get('http://localhost:8000/show-warehouses/', {
+        const response = await axios.get('http://localhost:8000/show-discounts/', {
         headers: {
             'Authorization': `Token ${token}`
         }
         });
-        warehouseData.value = response.data;
+        discountData.value = response.data;
     } catch (error) {
         if (error.response && error.response.status === 401) {
         console.error('Unauthorized, redirecting to login.');
         router.push('/login');
         } else {
-        console.error('Error fetching warehouse data:', error);
+        console.error('Error fetching discount data:', error);
         }
     }
 };
 
-const deleteWarehouse = async (warehouse) => {
-    if (!warehouse) {
-        console.error('No warehouse object provided.');
+const deleteDiscount = async (discount) => {
+    if (!discount) {
+        console.error('No discount object provided.');
         return;
     }
 
@@ -59,16 +59,16 @@ const deleteWarehouse = async (warehouse) => {
     }
 
     try {
-        const response = await axios.delete(`http://localhost:8000/delete-warehouse/${warehouse.warehouse_id}/`, {
+        const response = await axios.delete(`http://localhost:8000/delete-discount/${discount.discount_id}/`, {
         headers: {
             'Authorization': `Token ${token}`
         }
         });
         if (response.status === 204) {
-        warehouseData.value = warehouseData.value.filter(item => item.warehouse_id !== warehouse.warehouse_id);
-        showToast('success', 'Éxito', 'Almacén eliminado correctamente');
+        discountData.value = discountData.value.filter(item => item.discount_id !== discount.discount_id);
+        showToast('success', 'Éxito', 'Descuento eliminado correctamente');
         } else {
-        showToast('error', 'Error', 'Error al eliminar el almacén');
+        showToast('error', 'Error', 'Error al eliminar el descuento');
         }
     } catch (error) {
         if (error.response && error.response.status === 401) {
@@ -77,8 +77,8 @@ const deleteWarehouse = async (warehouse) => {
         } else if (error.response && error.response.status === 404) {
         showToast('error', 'Error', 'Almacén no encontrado');
         } else {
-        console.error('Error deleting warehouse:', error);
-        showToast('error', 'Error', 'Error al eliminar el almacén');
+        console.error('Error deleting discount:', error);
+        showToast('error', 'Error', 'Error al eliminar el descuento');
         }
     }
 };
@@ -92,7 +92,7 @@ const confirmDeleteDialog = (data) => {
 };
 
 
-fetchWarehouseData();
+fetchDiscountData();
 </script>
 
 <style scoped>

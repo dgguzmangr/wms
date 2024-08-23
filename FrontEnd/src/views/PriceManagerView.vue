@@ -1,10 +1,10 @@
 <template>
     <CrudTable 
-        :tableTitle="tableTitles.warehouses" 
-        :tableColumns="warehouseColumns" 
-        :createDialogFields="warehouseCreateFields"
-        :tableData="warehouseData" 
-        :deleteItem="deleteWarehouse"
+        :tableTitle="tableTitles.prices" 
+        :tableColumns="priceColumns" 
+        :createDialogFields="priceCreateFields"
+        :tableData="priceData" 
+        :deleteItem="deletePrice"
         :confirmDeleteDialog="confirmDeleteDialog"
     />
 </template>
@@ -13,15 +13,15 @@
 import { ref } from 'vue';
 import { useToast } from 'primevue/usetoast';
 import CrudTable from '@/components/CrudTable.vue';
-import { warehouseColumns, warehouseCreateFields, tableTitles } from '@/utils/warehouseCrudTable.js';
+import { priceColumns, priceCreateFields, tableTitles } from '@/utils/priceCrudTable.js';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
-const warehouseData = ref([]);
+const priceData = ref([]);
 const toast = useToast();
 
-const fetchWarehouseData = async () => {
+const fetchPriceData = async () => {
     const token = localStorage.getItem('token');
     if (!token) {
         console.error('No token found, redirecting to login.');
@@ -29,25 +29,25 @@ const fetchWarehouseData = async () => {
         return;
     }
     try {
-        const response = await axios.get('http://localhost:8000/show-warehouses/', {
+        const response = await axios.get('http://localhost:8000/show-prices/', {
         headers: {
             'Authorization': `Token ${token}`
         }
         });
-        warehouseData.value = response.data;
+        priceData.value = response.data;
     } catch (error) {
         if (error.response && error.response.status === 401) {
         console.error('Unauthorized, redirecting to login.');
         router.push('/login');
         } else {
-        console.error('Error fetching warehouse data:', error);
+        console.error('Error fetching price data:', error);
         }
     }
 };
 
-const deleteWarehouse = async (warehouse) => {
-    if (!warehouse) {
-        console.error('No warehouse object provided.');
+const deletePrice = async (price) => {
+    if (!price) {
+        console.error('No price object provided.');
         return;
     }
 
@@ -59,26 +59,26 @@ const deleteWarehouse = async (warehouse) => {
     }
 
     try {
-        const response = await axios.delete(`http://localhost:8000/delete-warehouse/${warehouse.warehouse_id}/`, {
+        const response = await axios.delete(`http://localhost:8000/delete-price/${price.price_id}/`, {
         headers: {
             'Authorization': `Token ${token}`
         }
         });
         if (response.status === 204) {
-        warehouseData.value = warehouseData.value.filter(item => item.warehouse_id !== warehouse.warehouse_id);
-        showToast('success', 'Éxito', 'Almacén eliminado correctamente');
+            priceData.value = priceData.value.filter(item => item.price_id !== price.price_id);
+        showToast('success', 'Éxito', 'Precio eliminado correctamente');
         } else {
-        showToast('error', 'Error', 'Error al eliminar el almacén');
+        showToast('error', 'Error', 'Error al eliminar el precio');
         }
     } catch (error) {
         if (error.response && error.response.status === 401) {
         console.error('Unauthorized, redirecting to login.');
         router.push('/login');
         } else if (error.response && error.response.status === 404) {
-        showToast('error', 'Error', 'Almacén no encontrado');
+        showToast('error', 'Error', 'Precio no encontrado');
         } else {
-        console.error('Error deleting warehouse:', error);
-        showToast('error', 'Error', 'Error al eliminar el almacén');
+        console.error('Error deleting price:', error);
+        showToast('error', 'Error', 'Error al eliminar el precio');
         }
     }
 };
@@ -92,7 +92,7 @@ const confirmDeleteDialog = (data) => {
 };
 
 
-fetchWarehouseData();
+fetchPriceData();
 </script>
 
 <style scoped>

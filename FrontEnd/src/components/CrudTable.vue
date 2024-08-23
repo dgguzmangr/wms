@@ -43,7 +43,12 @@
                 </Column>
             </DataTable>
             <!--Create items dialog-->
-            <!--<EntityManager :visible="entityManagerVisible" @update:visible="entityManagerVisible = $event" />-->
+            <EntityManager 
+                :visible="entityManagerVisible" 
+                @update:visible="entityManagerVisible = $event" 
+                :tableTitle="tableTitle"
+                :createDialogFields="createDialogFields"
+            />
             <!--Item deletion confirmation dialog-->
             <Dialog v-model:visible="deleteItemDialog" :style="{ width: '450px' }" header="Confirmación" :modal="true">
                 <div class="confirmation-content">
@@ -76,7 +81,7 @@ import { ref, onMounted, defineProps } from 'vue';
 import { FilterMatchMode } from 'primevue/api';
 import { useConfirm } from "primevue/useconfirm";
 import { useToast } from 'primevue/usetoast';
-//import EntityManager from '@/components/EntityManager.vue';
+import EntityManager from '@/components/EntityManager.vue';
 
 const props = defineProps({
     tableTitle: {
@@ -111,7 +116,7 @@ const item = ref({});
 const itemDialog = ref(false);
 const deleteItemDialog = ref(false);
 const deleteItemsDialog = ref(false);
-//const entityManagerVisible = ref(false);
+const entityManagerVisible = ref(false);
 const selectedItems = ref([]);
 const filters = ref({
     'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -124,7 +129,7 @@ onMounted(() => {
 });
 
 const openNew = () => {
-    //entityManagerVisible.value = true;
+    entityManagerVisible.value = true;
 };
 
 const isRequired = (key) => {

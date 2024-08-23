@@ -117,11 +117,13 @@ const signUp = async () => {
         </div>
     </div>
     <div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
-        <div class="flex flex-column align-items-center justify-content-center">
+        <div class="flex flex-column align-items-center justify-content-center pt-5">
+            <!--
             <div class="md:mx-6 lg:mx-8 lg:px-8 flex align-items-center justify-content-between relative lg:static mb-3 pb-3">
                 <img :src="logoUrl" alt="DGG WMS Logo Logo" height="50" class="mr-0 lg:mr-2" />
                 <span class="text-center text-900 font-medium text-2xl line-height-2 ml-2">DGG <br> WMS</span>
             </div>
+            -->
             <div style="border-radius: 56px; padding: 0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%)">
                 <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius: 53px">
                     <div class="text-center mb-5">
@@ -199,7 +201,9 @@ const signUp = async () => {
             </div>
         </div>
     </div>
-    <AppConfig simple />
+    <div class="layout-wrapper" style="min-height: auto;">
+        <AppConfig simple />
+    </div>
 </template>
 
 <style scoped>

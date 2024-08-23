@@ -42,5 +42,7 @@ import AppConfig from '@/layout/AppConfig.vue';
             </div>
         </div>
     </div>
-    <AppConfig simple />
+    <div class="layout-wrapper" style="min-height: auto;">
+        <AppConfig simple />
+    </div>
 </template>

@@ -73,12 +73,13 @@ const logoUrl = computed(() => {
             <div id="hero" class="flex flex-column pt-4 px-4 lg:px-8 overflow-hidden"
                 style="background: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), radial-gradient(77.36% 256.97% at 77.36% 57.52%, rgb(238, 239, 175) 0%, rgb(195, 227, 250) 100%); clip-path: ellipse(150% 87% at 93% 13%)">
                 <div class="mx-4 md:mx-8 mt-0 md:mt-4">
-                    <h1 class="text-6xl font-bold text-gray-900 line-height-2"><span class="font-light block">Eu sem
-                            integer</span>eget magna fermentum</h1>
-                    <p class="font-normal text-2xl line-height-3 md:mt-3 text-gray-700">Sed blandit libero volutpat sed
-                        cras. Fames ac turpis egestas integer. Placerat in egestas erat...</p>
-                    <Button label="Get Started"
-                        class="p-button-rounded text-xl border-none mt-5 bg-blue-500 font-normal text-white line-height-3 px-3"></Button>
+                    <h1 class="text-6xl font-bold text-gray-900 line-height-2"><span class="font-light block">Optimiza tu almacen</span>Crece con control</h1>
+                    <p class="font-normal text-2xl line-height-3 md:mt-3 text-gray-700">Optimiza tu gestión de almacenes con nuestro WMS: mayor eficiencia, control total y crecimiento garantizado.</p>
+                    <router-link to="/register">
+                        <Button label="Empezar"
+                            class="p-button-rounded text-xl border-none mt-5 bg-blue-500 font-normal text-white line-height-3 px-3">
+                        </Button>
+                    </router-link>    
                 </div>
                 <div class="flex justify-content-center md:justify-content-end">
                     <img src="/demo/images/landing/screen-1.png" alt="Hero Image" class="w-9 md:w-auto" />
@@ -89,7 +90,6 @@ const logoUrl = computed(() => {
                 <div class="grid justify-content-center">
                     <div class="col-12 text-center mt-8 mb-4">
                         <h2 class="text-900 font-normal mb-2">CARACTERISTICAS ADECUADAS PARA CADA NEGOCIO</h2>
-                        <span class="text-600 text-2xl">Placerat in egestas erat...</span>
                     </div>
 
                     <div class="col-12 md:col-12 lg:col-4 p-0 lg:pr-5 lg:pb-5 mt-4 lg:mt-0">
@@ -98,10 +98,10 @@ const logoUrl = computed(() => {
                             <div class="p-3 surface-card h-full" style="border-radius: 8px">
                                 <div class="flex align-items-center justify-content-center bg-yellow-200 mb-3"
                                     style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <i class="pi pi-fw pi-users text-2xl text-yellow-700"></i>
+                                    <i class="pi pi-fw pi-box text-2xl text-yellow-700"></i>
                                 </div>
-                                <h5 class="mb-2 text-900">Easy to Use</h5>
-                                <span class="text-600">Posuere morbi leo urna molestie.</span>
+                                <h5 class="mb-2 text-900">Gestión de inventario en tiempo real</h5>
+                                <span class="text-600">Monitoreo y actualización automática de niveles de stock y movimientos de inventario en tiempo real.</span>
                             </div>
                         </div>
                     </div>
@@ -112,10 +112,10 @@ const logoUrl = computed(() => {
                             <div class="p-3 surface-card h-full" style="border-radius: 8px">
                                 <div class="flex align-items-center justify-content-center bg-cyan-200 mb-3"
                                     style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <i class="pi pi-fw pi-palette text-2xl text-cyan-700"></i>
+                                    <i class="pi pi-fw pi-map text-2xl text-cyan-700"></i>
                                 </div>
-                                <h5 class="mb-2 text-900">Fresh Design</h5>
-                                <span class="text-600">Semper risus in hendrerit.</span>
+                                <h5 class="mb-2 text-900">Control de ubicaciones</h5>
+                                <span class="text-600">Administración de ubicaciones en bodega, optimizando el almacenamiento y la recuperación de productos.</span>
                             </div>
                         </div>
                     </div>
@@ -126,10 +126,10 @@ const logoUrl = computed(() => {
                             <div class="p-3 surface-card h-full" style="border-radius: 8px">
                                 <div class="flex align-items-center justify-content-center bg-indigo-200"
                                     style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <i class="pi pi-fw pi-map text-2xl text-indigo-700"></i>
+                                    <i class="pi pi-fw pi-check text-2xl text-indigo-700"></i>
                                 </div>
-                                <h5 class="mb-2 text-900">Well Documented</h5>
-                                <span class="text-600">Non arcu risus quis varius quam quisque.</span>
+                                <h5 class="mb-2 text-900">Gestión de órdenes</h5>
+                                <span class="text-600">Procesamiento y seguimiento de órdenes de compra, venta y devoluciones de manera eficiente.</span>
                             </div>
                         </div>
                     </div>
@@ -140,10 +140,10 @@ const logoUrl = computed(() => {
                             <div class="p-3 surface-card h-full" style="border-radius: 8px">
                                 <div class="flex align-items-center justify-content-center bg-bluegray-200 mb-3"
                                     style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <i class="pi pi-fw pi-id-card text-2xl text-bluegray-700"></i>
+                                    <i class="pi pi-fw pi-truck text-2xl text-bluegray-700"></i>
                                 </div>
-                                <h5 class="mb-2 text-900">Responsive Layout</h5>
-                                <span class="text-600">Nulla malesuada pellentesque elit.</span>
+                                <h5 class="mb-2 text-900">Optimización de rutas de picking</h5>
+                                <span class="text-600">Mejora de la eficiencia en el proceso de recolección de productos mediante la optimización de rutas.</span>
                             </div>
                         </div>
                     </div>
@@ -154,10 +154,10 @@ const logoUrl = computed(() => {
                             <div class="p-3 surface-card h-full" style="border-radius: 8px">
                                 <div class="flex align-items-center justify-content-center bg-orange-200 mb-3"
                                     style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <i class="pi pi-fw pi-star text-2xl text-orange-700"></i>
+                                    <i class="pi pi-fw pi-chart-bar text-2xl text-orange-700"></i>
                                 </div>
-                                <h5 class="mb-2 text-900">Clean Code</h5>
-                                <span class="text-600">Condimentum lacinia quis vel eros.</span>
+                                <h5 class="mb-2 text-900">Reportes y análisis de datos</h5>
+                                <span class="text-600">Generación de reportes personalizados y análisis detallado del rendimiento de la bodega y del inventario.</span>
                             </div>
                         </div>
                     </div>
@@ -168,10 +168,10 @@ const logoUrl = computed(() => {
                             <div class="p-3 surface-card h-full" style="border-radius: 8px">
                                 <div class="flex align-items-center justify-content-center bg-pink-200 mb-3"
                                     style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <i class="pi pi-fw pi-moon text-2xl text-pink-700"></i>
+                                    <i class="pi pi-fw pi-cog text-2xl text-pink-700"></i>
                                 </div>
-                                <h5 class="mb-2 text-900">Dark Mode</h5>
-                                <span class="text-600">Convallis tellus id interdum velit laoreet.</span>
+                                <h5 class="mb-2 text-900">Integración con otros sistemas</h5>
+                                <span class="text-600">Conectividad con sistemas ERP, CRM y de facturación para una gestión integrada de la cadena de suministro.</span>
                             </div>
                         </div>
                     </div>
@@ -182,10 +182,10 @@ const logoUrl = computed(() => {
                             <div class="p-3 surface-card h-full" style="border-radius: 8px">
                                 <div class="flex align-items-center justify-content-center bg-teal-200 mb-3"
                                     style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <i class="pi pi-fw pi-shopping-cart text-2xl text-teal-700"></i>
+                                    <i class="pi pi-fw pi-building text-2xl text-teal-700"></i>
                                 </div>
-                                <h5 class="mb-2 text-900">Ready to Use</h5>
-                                <span class="text-600">Mauris sit amet massa vitae.</span>
+                                <h5 class="mb-2 text-900">Soporte para múltiples bodegas</h5>
+                                <span class="text-600">Capacidad de gestionar inventarios en varias ubicaciones o edificios desde una única plataforma.</span>
                             </div>
                         </div>
                     </div>
@@ -198,8 +198,8 @@ const logoUrl = computed(() => {
                                     style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
                                     <i class="pi pi-fw pi-globe text-2xl text-blue-700"></i>
                                 </div>
-                                <h5 class="mb-2 text-900">Modern Practices</h5>
-                                <span class="text-600">Elementum nibh tellus molestie nunc non.</span>
+                                <h5 class="mb-2 text-900">Automatización de procesos</h5>
+                                <span class="text-600">Automatización de tareas repetitivas, como la actualización de stock, el reabastecimiento y la emisión de alertas.</span>
                             </div>
                         </div>
                     </div>
@@ -210,10 +210,10 @@ const logoUrl = computed(() => {
                             <div class="p-3 surface-card h-full" style="border-radius: 8px">
                                 <div class="flex align-items-center justify-content-center bg-purple-200 mb-3"
                                     style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <i class="pi pi-fw pi-eye text-2xl text-purple-700"></i>
+                                    <i class="pi pi-fw pi-wrench text-2xl text-purple-700"></i>
                                 </div>
-                                <h5 class="mb-2 text-900">Privacy</h5>
-                                <span class="text-600">Neque egestas congue quisque.</span>
+                                <h5 class="mb-2 text-900">Configuración y personalización</h5>
+                                <span class="text-600">Flexibilidad para adaptar el sistema a las necesidades específicas del negocio, incluyendo flujos de trabajo personalizados.</span>
                             </div>
                         </div>
                     </div>
@@ -222,13 +222,11 @@ const logoUrl = computed(() => {
                         style="border-radius: 20px; background: linear-gradient(0deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), radial-gradient(77.36% 256.97% at 77.36% 57.52%, #efe1af 0%, #c3dcfa 100%)">
                         <div
                             class="flex flex-column justify-content-center align-items-center text-center px-3 py-3 md:py-0">
-                            <h3 class="text-gray-900 mb-2">Joséphine Miller</h3>
-                            <span class="text-gray-600 text-2xl">Peak Interactive</span>
+                            <h3 class="text-gray-900 mb-2">Laura Martínez, Directora de Operaciones</h3>
+                            <span class="text-gray-600 text-2xl">Peak Corp.</span>
                             <p class="text-gray-900 sm:line-height-2 md:line-height-4 text-2xl mt-4"
                                 style="max-width: 800px">
-                                “Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                                officia deserunt mollit anim id est laborum.”
+                                "Desde que implementamos el WMS de DGGUZMANGR, hemos optimizado nuestras operaciones de bodega en un 40%. La automatización y la precisión mejorada nos han permitido aumentar nuestras ganancias en un 25%. Estamos impresionados con la eficiencia que hemos logrado. Recomiendo altamente esta solución."
                             </p>
                             <img src="/demo/images/landing/peak-logo.svg" class="mt-4" alt="Company logo" />
                         </div>
@@ -238,8 +236,8 @@ const logoUrl = computed(() => {
 
             <div id="highlights" class="py-4 px-4 lg:px-8 mx-0 my-6 lg:mx-8">
                 <div class="text-center">
-                    <h2 class="text-900 font-normal mb-2">Powerful Everywhere</h2>
-                    <span class="text-600 text-2xl">Amet consectetur adipiscing elit...</span>
+                    <h2 class="text-900 font-normal mb-2">Poderoso siempre</h2>
+                    <span class="text-600 text-2xl">Controla tu almacen sin límites</span>
                 </div>
 
                 <div class="grid mt-8 pb-2 md:pb-8">
@@ -253,10 +251,8 @@ const logoUrl = computed(() => {
                             style="width: 4.2rem; height: 4.2rem; border-radius: 10px">
                             <i class="pi pi-fw pi-mobile text-5xl text-purple-700"></i>
                         </div>
-                        <h2 class="line-height-1 text-900 text-4xl font-normal">Congue Quisque Egestas</h2>
-                        <span class="text-700 text-2xl line-height-3 ml-0 md:ml-2" style="max-width: 650px">Lectus arcu
-                            bibendum at varius vel pharetra vel turpis nunc. Eget aliquet nibh praesent tristique magna
-                            sit amet purus gravida. Sit amet mattis vulputate enim nulla aliquet.</span>
+                        <h2 class="line-height-1 text-900 text-4xl font-normal">Soporte para dispositivos móviles</h2>
+                        <span class="text-700 text-2xl line-height-3 ml-0 md:ml-2" style="max-width: 650px">Compatibilidad con aplicaciones móviles para gestionar operaciones desde dispositivos como tablets o smartphones, permitiendo una mayor movilidad dentro del almacén.</span>
                     </div>
                 </div>
 
@@ -264,13 +260,10 @@ const logoUrl = computed(() => {
                     <div class="col-12 lg:col-6 my-auto flex flex-column text-center lg:text-left lg:align-items-start">
                         <div class="flex align-items-center justify-content-center bg-yellow-200 align-self-center lg:align-self-start"
                             style="width: 4.2rem; height: 4.2rem; border-radius: 10px">
-                            <i class="pi pi-fw pi-desktop text-5xl text-yellow-700"></i>
+                            <i class="pi pi-fw pi-users text-5xl text-yellow-700"></i>
                         </div>
-                        <h2 class="line-height-1 text-900 text-4xl font-normal">Celerisque Eu Ultrices</h2>
-                        <span class="text-700 text-2xl line-height-3 mr-0 md:mr-2" style="max-width: 650px">Adipiscing
-                            commodo elit at imperdiet dui. Viverra nibh cras pulvinar mattis nunc sed blandit libero.
-                            Suspendisse in est ante in. Mauris pharetra et ultrices neque ornare aenean euismod
-                            elementum nisi.</span>
+                        <h2 class="line-height-1 text-900 text-4xl font-normal">Gestión de usuarios y permisos:</h2>
+                        <span class="text-700 text-2xl line-height-3 mr-0 md:mr-2" style="max-width: 650px">Control de acceso y permisos de usuario personalizados para garantizar la seguridad de los datos y el cumplimiento de roles específicos.</span>
                     </div>
 
                     <div class="flex justify-content-end flex-order-1 sm:flex-order-2 col-12 lg:col-6 bg-yellow-100 p-0"
@@ -291,31 +284,34 @@ const logoUrl = computed(() => {
                         <div class="p-3 flex flex-column border-200 pricing-card cursor-pointer border-2 hover:border-primary transition-duration-300 transition-all"
                             style="border-radius: 10px">
                             <h3 class="text-900 text-center my-5">Free</h3>
-                            <img src="" class="w-6 h-auto mx-auto" alt="free" />
-                            <!--<img src="layout/images/smallbussines.jpg" class="w-6 h-auto mx-auto" alt="free" />-->
+                            <!--<img src="" class="w-6 h-auto mx-auto" alt="free" />-->
+                            <img src='@/assets/images/smallbussines.jpg' class="w-6 h-auto mx-auto" alt="free" />
                             <div class="my-5 pt-2 text-center">
                                 <span class="text-5xl font-bold mr-2 text-900">$0</span>
                                 <span class="text-600">por mes</span>
-                                <Button label="Get Started"
-                                    class="block mx-auto mt-4 p-button-rounded border-none ml-3 font-light line-height-2 bg-blue-500 text-white"></Button>
+                                <router-link to="/register">
+                                    <Button label="Empezar"
+                                        class="block mx-auto mt-4 p-button-rounded border-none ml-3 font-light line-height-2 bg-blue-500 text-white">
+                                    </Button>
+                                </router-link>
                             </div>
                             <Divider class="w-full bg-surface-200"></Divider>
                             <ul class="my-5 list-none p-0 flex text-900 flex-column">
                                 <li class="py-2">
                                     <i class="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                    <span class="text-xl line-height-3">Responsive Layout</span>
+                                    <span class="text-xl line-height-3">Límite de registros</span>
                                 </li>
                                 <li class="py-2">
                                     <i class="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                    <span class="text-xl line-height-3">Unlimited Push Messages</span>
+                                    <span class="text-xl line-height-3">Gestión básica de inventario</span>
                                 </li>
                                 <li class="py-2">
                                     <i class="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                    <span class="text-xl line-height-3">50 Support Ticket</span>
+                                    <span class="text-xl line-height-3">Soporte comunitario</span>
                                 </li>
                                 <li class="py-2">
                                     <i class="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                    <span class="text-xl line-height-3">Free Shipping</span>
+                                    <span class="text-xl line-height-3">Acceso web limitado</span>
                                 </li>
                             </ul>
                         </div>
@@ -325,31 +321,34 @@ const logoUrl = computed(() => {
                         <div class="p-3 flex flex-column border-200 pricing-card cursor-pointer border-2 hover:border-primary transition-duration-300 transition-all"
                             style="border-radius: 10px">
                             <h3 class="text-900 text-center my-5">Pequeños negocios</h3>
-                            <img src="" class="w-6 h-auto mx-auto" alt="startup" />
-                            <!--<img src="layout/images/2006.jpg" class="w-6 h-auto mx-auto" alt="startup" />-->
+                            <!--<img src="" class="w-6 h-auto mx-auto" alt="startup" />-->
+                            <img src="@/assets/images/2006.jpg" class="w-6 h-auto mx-auto" alt="startup" />
                             <div class="my-5 text-center">
                                 <span class="text-5xl font-bold mr-2 text-900">$10</span>
                                 <span class="text-600">por mes</span>
-                                <Button label="Try Free"
-                                    class="block mx-auto mt-4 p-button-rounded border-none ml-3 font-light line-height-2 bg-blue-500 text-white"></Button>
+                                <router-link to="/register">
+                                    <Button label="Empezar"
+                                        class="block mx-auto mt-4 p-button-rounded border-none ml-3 font-light line-height-2 bg-blue-500 text-white">
+                                    </Button>
+                                </router-link>
                             </div>
                             <Divider class="w-full bg-surface-200"></Divider>
                             <ul class="my-5 list-none p-0 flex text-900 flex-column">
                                 <li class="py-2">
                                     <i class="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                    <span class="text-xl line-height-3">Responsive Layout</span>
+                                    <span class="text-xl line-height-3">Escalabilidad</span>
                                 </li>
                                 <li class="py-2">
                                     <i class="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                    <span class="text-xl line-height-3">Unlimited Push Messages</span>
+                                    <span class="text-xl line-height-3">Reportes avanzados</span>
                                 </li>
                                 <li class="py-2">
                                     <i class="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                    <span class="text-xl line-height-3">50 Support Ticket</span>
+                                    <span class="text-xl line-height-3">Soporte técnico básico</span>
                                 </li>
                                 <li class="py-2">
                                     <i class="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                    <span class="text-xl line-height-3">Free Shipping</span>
+                                    <span class="text-xl line-height-3">Integraciones</span>
                                 </li>
                             </ul>
                         </div>
@@ -359,31 +358,34 @@ const logoUrl = computed(() => {
                         <div class="p-3 flex flex-column border-200 pricing-card cursor-pointer border-2 hover:border-primary transition-duration-300 transition-all"
                             style="border-radius: 10px">
                             <h3 class="text-900 text-center my-5">Empresas</h3>
-                            <img src="" class="w-11 h-auto d-block mx-auto pb-1" alt="enterprise" />
-                            <!--<img src="layout/images/1777.jpg" class="w-11 h-auto d-block mx-auto pb-1" alt="enterprise" />-->
+                            <!--<img src="" class="w-11 h-auto d-block mx-auto pb-1" alt="enterprise" />-->
+                            <img src="@/assets/images/1777.jpg" class="w-11 h-auto d-block mx-auto pb-1" alt="enterprise" />
                             <div class="my-5 text-center">
                                 <span class="text-5xl font-bold mr-2 text-900">$250</span>
                                 <span class="text-600">por mes</span>
-                                <Button label="Get a Quote"
-                                    class="block mx-auto mt-4 p-button-rounded border-none ml-3 font-light line-height-2 bg-blue-500 text-white"></Button>
+                                <router-link to="/contact">
+                                    <Button label="Cotiza aquí"
+                                        class="block mx-auto mt-4 p-button-rounded border-none ml-3 font-light line-height-2 bg-blue-500 text-white">
+                                    </Button>
+                                </router-link>
                             </div>
                             <Divider class="w-full bg-surface-200"></Divider>
                             <ul class="my-5 list-none p-0 flex text-900 flex-column">
                                 <li class="py-2">
                                     <i class="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                    <span class="text-xl line-height-3">Responsive Layout</span>
+                                    <span class="text-xl line-height-3">Gestión avanzada de bodegas</span>
                                 </li>
                                 <li class="py-2">
                                     <i class="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                    <span class="text-xl line-height-3">Unlimited Push Messages</span>
+                                    <span class="text-xl line-height-3">Automatización y personalización</span>
                                 </li>
                                 <li class="py-2">
                                     <i class="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                    <span class="text-xl line-height-3">50 Support Ticket</span>
+                                    <span class="text-xl line-height-3">Soporte prioritario</span>
                                 </li>
                                 <li class="py-2">
                                     <i class="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                    <span class="text-xl line-height-3">Free Shipping</span>
+                                    <span class="text-xl line-height-3">Integraciones empresariales</span>
                                 </li>
                             </ul>
                         </div>
@@ -439,7 +441,11 @@ const logoUrl = computed(() => {
             </div>
         </div>
     </div>
-    <AppConfig simple />
+    <div class="layout-wrapper" style="min-height: auto;">
+        <AppConfig simple />
+    </div>
+
+    
 </template>
 
 <style scoped>
