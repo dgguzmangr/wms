@@ -21,6 +21,13 @@ const model = ref([
         label: 'Módulos',
         items: [
             { label: 'Usuarios1', icon: 'pi pi-fw pi-users', to: '/users_manager', requiredPermissions: ['show_users'] },
+            { label: 'Edificios', icon: 'pi pi-fw pi-home', to: '/buildingmanager', requiredPermissions: [
+                'authApp.show_buildings', 
+                'authApp.create_buildings',
+                'authApp.update_buildings', 
+                'authApp.partial_update_buildings',
+                'authApp.delete_buildings',
+            ] },
             { label: 'Bodegas', icon: 'pi pi-fw pi-home', to: '/warehousemanager', requiredPermissions: [
                 'authApp.show_warehouses', 
                 'authApp.create_warehouses',
@@ -28,6 +35,13 @@ const model = ref([
                 'authApp.partial_update_warehouses',
                 'authApp.delete_warehouses',
                 'authApp.show_warehouse_buildings',
+            ] },
+            { label: 'Ubicaciones', icon: 'pi pi-fw pi-home', to: '/locationmanager', requiredPermissions: [
+                'authApp.show_locations', 
+                'authApp.create_locations',
+                'authApp.update_locations', 
+                'authApp.partial_update_locations',
+                'authApp.delete_locations'
             ] },
             { label: 'Productos', icon: 'pi pi-fw pi-box', to: '/productmanager', requiredPermissions: [
                 'authApp.show_products', 
@@ -61,6 +75,13 @@ const model = ref([
                 'authApp.update_prices', 
                 'authApp.partial_update_prices',
                 'authApp.delete_prices',
+            ] },
+            { label: 'Impuestos', icon: 'pi pi-fw pi-box', to: '/taxmanager', requiredPermissions: [
+                'authApp.show_taxes', 
+                'authApp.create_taxes',
+                'authApp.update_taxes', 
+                'authApp.partial_update_taxes',
+                'authApp.delete_taxes',
             ] },
 
             { label: 'Inventario1', icon: 'pi pi-fw pi-check-circle', to: '/inventory_manager', requiredPermissions: ['edit_inventory'] },

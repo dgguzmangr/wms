@@ -22,7 +22,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { warehouseCreateFields } from '@/data/warehouseFields'; // Cambia la ruta según corresponda
+
 
 const props = defineProps({
     visible: Boolean,

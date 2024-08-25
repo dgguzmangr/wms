@@ -31,24 +31,24 @@
         <h2 class="text-center w-full lg:w-2/3">Formulario de Contacto</h2>
         <form @submit.prevent="handleSubmit" class="d-flex flex-wrap w-full lg:w-2/3 justify-content-between align-items-center">
             <div class="d-flex flex-column w-full md:w-1/2 px-2 mb-4">
-                <label for="name">Nombre:</label>
-                <input type="text" v-model="form.name" id="name" class="w-full" required />
+                <label for="name" class="block text-900 text-xl font-medium mb-2">Nombre:</label>
+                <InputText type="text" placeholder="Nombre" v-model="form.name" id="name" class="w-full" required />
             </div>
             <div class="d-flex flex-column w-full md:w-1/2 px-2 mb-4">
-                <label for="company">Empresa:</label>
-                <input type="text" v-model="form.company" id="company" class="w-full" required />
+                <label for="company" class="block text-900 text-xl font-medium mb-2">Empresa:</label>
+                <InputText type="text" placeholder="Empresa" v-model="form.company" id="company" class="w-full" required />
             </div>
             <div class="d-flex flex-column w-full md:w-1/2 px-2 mb-4">
-                <label for="email">Correo Electrónico:</label>
-                <input type="email" v-model="form.email" id="email" class="w-full" required />
+                <label for="email" class="block text-900 text-xl font-medium mb-2">Correo Electrónico:</label>
+                <InputText type="email" placeholder="Correo electrónico" v-model="form.email" id="email" class="w-full" required />
             </div>
             <div class="d-flex flex-column w-full md:w-1/2 px-2 mb-4">
-                <label for="phone">Teléfono:</label>
-                <input type="tel" v-model="form.phone" id="phone" class="w-full" required />
+                <label for="phone" class="block text-900 text-xl font-medium mb-2">Teléfono:</label>
+                <InputText type="tel" placeholder="Teléfono" v-model="form.phone" id="phone" class="w-full" required />
             </div>
             <div class="d-flex flex-column w-full px-2 mb-4">
-                <label for="message">Mensaje:</label>
-                <textarea v-model="form.message" id="message" class="w-full" required></textarea>
+                <label for="message" class="block text-900 text-xl font-medium mb-2">Mensaje:</label>
+                <Textarea placeholder="Deja tu mensaje" v-model="form.message" id="message" class="w-full" required></Textarea>
             </div>
             <div class="d-flex justify-content-center w-full px-2">
                 <Button type="submit" class="p-button-rounded border-none font-bold text-white line-height-2 bg-blue-500">Enviar</Button>

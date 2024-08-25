@@ -108,6 +108,42 @@ const routes = [
                 ]}
             },
             {
+                path: '/taxmanager',
+                name: 'taxmanager',
+                component: () => import('@/views/TaxManagerView.vue'),
+                meta: { requiresAuth: true, requiredPermissions: [
+                    'authApp.show_taxes', 
+                    'authApp.create_taxes',
+                    'authApp.update_taxes', 
+                    'authApp.partial_update_taxes',
+                    'authApp.delete_taxes',
+                ]}
+            },
+            {
+                path: '/buildingmanager',
+                name: 'buildingmanager',
+                component: () => import('@/views/BuildingManagerView.vue'),
+                meta: { requiresAuth: true, requiredPermissions: [
+                    'authApp.show_buildings', 
+                    'authApp.create_buildings',
+                    'authApp.update_buildings', 
+                    'authApp.partial_update_buildings',
+                    'authApp.delete_buildings',
+                ]}
+            },
+            {
+                path: '/locationmanager',
+                name: 'locationmanager',
+                component: () => import('@/views/LocationManagerView.vue'),
+                meta: { requiresAuth: true, requiredPermissions: [
+                    'authApp.show_locations', 
+                    'authApp.create_locations',
+                    'authApp.update_locations', 
+                    'authApp.partial_update_locations',
+                    'authApp.delete_locations',
+                ]}
+            },
+            {
                 path: '/inventory_manager',
                 name: 'inventory_manager',
                 component: () => import('@/views/Inventory_manager.vue'),
